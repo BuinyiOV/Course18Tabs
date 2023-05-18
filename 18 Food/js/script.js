@@ -41,22 +41,14 @@ window.addEventListener('DOMContentLoaded', function() {
 	
 	// Timer
 
-	const deadline = '2024-04-11';
+	const deadline = '2022-06-11';
 
 	function getTimeRemaining(endtime) {
-		 let days, seconds, minutes, hours;
-		 const t = Date.parse(endtime) - Date.parse(new Date());
-			  if (t <= 0){
-				days = 0,
-			  seconds = 0,
-			  minutes = 0,
-			  hours = 0;
-			  } else {
+		 const t = Date.parse(endtime) - Date.parse(new Date()),
 			  days = Math.floor( (t/(1000*60*60*24)) ),
 			  seconds = Math.floor( (t/1000) % 60 ),
 			  minutes = Math.floor( (t/1000/60) % 60 ),
 			  hours = Math.floor( (t/(1000*60*60) % 24) );
-			  }
 
 		 return {
 			  'total': t,
@@ -102,4 +94,39 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	setClock('.timer', deadline);
 
+	// Modal
+
+	const modalTrigger = document.querySelectorAll('[data-modal]'),
+		 modal = document.querySelector('.modal'),
+		 modalCloseBtn = document.querySelector('[data-close]');
+
+	modalTrigger.forEach(btn => {
+		 btn.addEventListener('click', function() {
+			  modal.classList.add('show');
+			  modal.classList.remove('hide');
+			  // Либо вариант с toggle - но тогда назначить класс в верстке
+			  document.body.style.overflow = 'hidden';
+		 });
+	});
+
+	function closeModal() {
+		 modal.classList.add('hide');
+		 modal.classList.remove('show');
+		 // Либо вариант с toggle - но тогда назначить класс в верстке
+		 document.body.style.overflow = '';
+	}
+	
+	modalCloseBtn.addEventListener('click', closeModal);
+
+	modal.addEventListener('click', (e) => {
+		 if (e.target === modal) {
+			  closeModal();
+		 }
+	});
+
+	document.addEventListener('keydown', (e) => {
+		 if (e.code === "Escape" && modal.classList.contains('show')) { 
+			  closeModal();
+		 }
+	});
 });
