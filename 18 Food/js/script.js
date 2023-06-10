@@ -280,5 +280,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			  prevModalDialog.classList.remove('hide');
 			  closeModal();
 		 }, 4000);
-	}
+	};
+
+	
 });
