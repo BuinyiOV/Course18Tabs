@@ -23,6 +23,20 @@
     }
   ],
   "requests": [
-      
+    {
+      "name": "personnel",
+      "phone": "66",
+      "id": 1
+    },
+    {
+      "name": "personUpdate",
+      "phone": "66",
+      "id": 2
+    },
+    {
+      "name": "vehicle",
+      "phone": "234134",
+      "id": 3
+    }
   ]
 }
