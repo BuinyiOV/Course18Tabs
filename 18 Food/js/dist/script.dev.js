@@ -216,8 +216,8 @@ window.addEventListener('DOMContentLoaded', function () {
     });
   };
 
-  getResource('http://localhost:3000/menu').then(function (data) {
-    data.forEach(function (_ref) {
+  axios.get('http://localhost:3000/menu').then(function (data) {
+    data.data.forEach(function (_ref) {
       var img = _ref.img,
           altimg = _ref.altimg,
           title = _ref.title,
