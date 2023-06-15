@@ -313,6 +313,7 @@ window.addEventListener('DOMContentLoaded', function () {
   //Slider
 
   var slides = document.querySelectorAll('.offer__slide'),
+      slider = document.querySelector('.offer__slider'),
       prev = document.querySelector('.offer__slider-prev'),
       next = document.querySelector('.offer__slider-next'),
       total = document.querySelector('#total'),
@@ -338,6 +339,44 @@ window.addEventListener('DOMContentLoaded', function () {
   slides.forEach(function (slide) {
     slide.style.width = width;
   });
+  slider.style.position = 'relative';
+  var indicators = document.createElement('ol'),
+      dots = [];
+
+  function dotsOpacity() {
+    dots.forEach(function (dot) {
+      return dot.style.opacity = '.5';
+    });
+    dots[slideIndex - 1].style.opacity = 1;
+  }
+
+  ;
+
+  function currentIndex() {
+    if (slides.length < 10) {
+      current.textContent = "0".concat(slideIndex);
+    } else {
+      current.textContent = slideIndex;
+    }
+  }
+
+  indicators.classList.add('carousel-indicators');
+  indicators.style.cssText = "\n\t\tposition: absolute;\n\t\tright: 0;\n\t\tbottom: 0;\n\t\tleft: 0;\n\t\tz-index: 15;\n\t\tdisplay: flex;\n\t\tjustify-content: center;\n\t\tmargin-right: 15%;\n\t\tmargin-left: 15%;\n\t\tlist-style: none;\n\t";
+  slider.append(indicators);
+
+  for (var i = 0; i < slides.length; i++) {
+    var dot = document.createElement('li');
+    dot.setAttribute('data-slide-to', i + 1);
+    dot.style.cssText = "\n\t\t\tbox-sizing: content-box;\n\t\t\tflex: 0 1 auto;\n\t\t\twidth: 30px;\n\t\t\theight: 6px;\n\t\t\tmargin-right: 3px;\n\t\t\tmargin-left: 3px;\n\t\t\tcursor: pointer;\n\t\t\tbackground-color: #fff;\n\t\t\tbackground-clip: padding-box;\n\t\t\tborder-top: 10px solid transparent;\n\t\t\tborder-bottom: 10px solid transparent;\n\t\t\topacity: 0.5;\n\t\t\ttransition: opacity 0.6s ease;\n\t\t";
+
+    if (i == 0) {
+      dot.style.opacity = 1;
+    }
+
+    indicators.append(dot);
+    dots.push(dot);
+  }
+
   next.addEventListener('click', function () {
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
@@ -353,11 +392,8 @@ window.addEventListener('DOMContentLoaded', function () {
       slideIndex++;
     }
 
-    if (slides.length < 10) {
-      current.textContent = "0".concat(slideIndex);
-    } else {
-      current.textContent = slideIndex;
-    }
+    currentIndex();
+    dotsOpacity();
   });
   prev.addEventListener('click', function () {
     if (offset == 0) {
@@ -374,11 +410,18 @@ window.addEventListener('DOMContentLoaded', function () {
       slideIndex--;
     }
 
-    if (slides.length < 10) {
-      current.textContent = "0".concat(slideIndex);
-    } else {
-      current.textContent = slideIndex;
-    }
+    currentIndex();
+    dotsOpacity();
+  });
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function (e) {
+      var slideTo = e.target.getAttribute('data-slide-to');
+      slideIndex = slideTo;
+      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+      slidesField.style.transform = "translateX(-".concat(offset, "px)");
+      currentIndex();
+      dotsOpacity();
+    });
   });
   /* Simple slider
   
