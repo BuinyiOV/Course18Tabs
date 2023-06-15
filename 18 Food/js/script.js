@@ -329,7 +329,9 @@ tabsParent.addEventListener('click', function(event) {
 		} else {
 			current.textContent = slideIndex;
 		}
-	}
+	};
+
+	
 
 	indicators.classList.add('carousel-indicators');
 	indicators.style.cssText = `
@@ -371,11 +373,15 @@ tabsParent.addEventListener('click', function(event) {
 		dots.push(dot);
 	}
 
+	function strToNum(str){
+		return +str.replace(/\D/g, '')
+	}
+
 	next.addEventListener('click', () => {
-		if(offset == +width.slice(0, width.length - 2) * (slides.length - 1)){
+		if(offset == strToNum (width) * (slides.length - 1)){
 			offset = 0;
 		} else {
-			offset += +width.slice(0, width.length - 2)
+			offset += strToNum (width)
 		}
 		slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -392,9 +398,9 @@ tabsParent.addEventListener('click', function(event) {
 
 	prev.addEventListener('click', () => {
 		if(offset == 0){
-			offset = +width.slice(0, width.length - 2) * (slides.length - 1)
+			offset = strToNum (width) * (slides.length - 1)
 		} else {
-			offset -= +width.slice(0, width.length - 2)
+			offset -= strToNum (width)
 		}
 		slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -414,7 +420,7 @@ tabsParent.addEventListener('click', function(event) {
 			const slideTo = e.target.getAttribute('data-slide-to');
 
 			slideIndex = slideTo;
-			offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+			offset = strToNum (width) * (slideTo - 1);
 
 			slidesField.style.transform = `translateX(-${offset}px)`;
 

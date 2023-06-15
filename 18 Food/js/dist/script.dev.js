@@ -360,6 +360,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  ;
   indicators.classList.add('carousel-indicators');
   indicators.style.cssText = "\n\t\tposition: absolute;\n\t\tright: 0;\n\t\tbottom: 0;\n\t\tleft: 0;\n\t\tz-index: 15;\n\t\tdisplay: flex;\n\t\tjustify-content: center;\n\t\tmargin-right: 15%;\n\t\tmargin-left: 15%;\n\t\tlist-style: none;\n\t";
   slider.append(indicators);
@@ -377,11 +378,15 @@ window.addEventListener('DOMContentLoaded', function () {
     dots.push(dot);
   }
 
+  function strToNum(str) {
+    return +str.replace(/\D/g, '');
+  }
+
   next.addEventListener('click', function () {
-    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+    if (offset == strToNum(width) * (slides.length - 1)) {
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += strToNum(width);
     }
 
     slidesField.style.transform = "translateX(-".concat(offset, "px)");
@@ -397,9 +402,9 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   prev.addEventListener('click', function () {
     if (offset == 0) {
-      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+      offset = strToNum(width) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= strToNum(width);
     }
 
     slidesField.style.transform = "translateX(-".concat(offset, "px)");
@@ -417,7 +422,7 @@ window.addEventListener('DOMContentLoaded', function () {
     dot.addEventListener('click', function (e) {
       var slideTo = e.target.getAttribute('data-slide-to');
       slideIndex = slideTo;
-      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+      offset = strToNum(width) * (slideTo - 1);
       slidesField.style.transform = "translateX(-".concat(offset, "px)");
       currentIndex();
       dotsOpacity();
