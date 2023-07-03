@@ -1,9 +1,12 @@
 "use strict";
 
-function timer() {
-  // Timer
-  var deadline = '2022-06-11';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
+function timer(id, deadline) {
+  // Timer
   function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date()),
         days = Math.floor(t / (1000 * 60 * 60 * 24)),
@@ -49,7 +52,8 @@ function timer() {
     }
   }
 
-  setClock('.timer', deadline);
+  setClock(id, deadline);
 }
 
-module.exports = timer;
+var _default = timer;
+exports["default"] = _default;

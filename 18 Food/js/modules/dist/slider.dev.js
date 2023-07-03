@@ -1,15 +1,28 @@
 "use strict";
 
-function slider() {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function slider(_ref) {
+  var container = _ref.container,
+      slide = _ref.slide,
+      nextArrow = _ref.nextArrow,
+      prevArrow = _ref.prevArrow,
+      totalCounter = _ref.totalCounter,
+      currentCounter = _ref.currentCounter,
+      wrapper = _ref.wrapper,
+      field = _ref.field;
   //Slider
-  var slides = document.querySelectorAll('.offer__slide'),
-      slider = document.querySelector('.offer__slider'),
-      prev = document.querySelector('.offer__slider-prev'),
-      next = document.querySelector('.offer__slider-next'),
-      total = document.querySelector('#total'),
-      current = document.querySelector('#current'),
-      slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-      slidesField = document.querySelector('.offer__slider-inner'),
+  var slides = document.querySelectorAll(slide),
+      slider = document.querySelector(container),
+      prev = document.querySelector(prevArrow),
+      next = document.querySelector(nextArrow),
+      total = document.querySelector(totalCounter),
+      current = document.querySelector(currentCounter),
+      slidesWrapper = document.querySelector(wrapper),
+      slidesField = document.querySelector(field),
       width = window.getComputedStyle(slidesWrapper).width;
   var slideIndex = 1;
   var offset = 0;
@@ -163,4 +176,5 @@ function slider() {
   */
 }
 
-module.exports = slider;
+var _default = slider;
+exports["default"] = _default;

@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
 function calc() {
   //Calculator
   var result = document.querySelector('.calculating__result span');
@@ -114,4 +119,5 @@ function calc() {
   getDynamicInformation('#age');
 }
 
-module.exports = calc;
+var _default = calc;
+exports["default"] = _default;

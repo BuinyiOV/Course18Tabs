@@ -1,5 +1,12 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _services = require("../services/services");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -57,40 +64,6 @@ function cards() {
     return MenuCard;
   }();
 
-  var getResource = function getResource(url) {
-    var res;
-    return regeneratorRuntime.async(function getResource$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return regeneratorRuntime.awrap(fetch(url));
-
-          case 2:
-            res = _context.sent;
-
-            if (res.ok) {
-              _context.next = 5;
-              break;
-            }
-
-            throw new Error("Could not fetch ".concat(url, ", status: ").concat(res.status));
-
-          case 5:
-            _context.next = 7;
-            return regeneratorRuntime.awrap(res.json());
-
-          case 7:
-            return _context.abrupt("return", _context.sent);
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    });
-  };
-
   axios.get('http://localhost:3000/menu').then(function (data) {
     data.data.forEach(function (_ref) {
       var img = _ref.img,
@@ -103,4 +76,5 @@ function cards() {
   });
 }
 
-module.exports = cards;
+var _default = cards;
+exports["default"] = _default;
